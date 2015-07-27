@@ -1,0 +1,134 @@
+Chopsticks!
+
+1. What is the independent variable in the experiment?
+The independent variable in this experiment is the chopstick length (it is not being affected by any other variable).
+
+2. What is the dependent variable in the experiment?
+The dependent variable in this experiment is the "Food Pinching Performance" (it is being affected and measured by the experiment).
+
+3. How is the dependent variable operationally defined?
+The dependent variable is operationally defined by the number of peanuts picked and placed in a cup (abbreviated PPPC) by an individual for a given chopstick length.
+
+4. Based on the description of the experiment and the data set, list at least two variables that you know were controlled.
+Based on the description of the experiment, I can safelly state that both the sample size and its composition were held constant ("thirty-one male junior college students and 21 primary school pupils").
+
+5. Which chopstick length performed the best for the group of thirty-one male junior college students?
+Based on this data the 240mm length chopstick group performed better with a mean of 26.322903 (before the 210mm group at 25.483871).
+
+6. Based on the scatterplot created from the code above, interpret the relationship you see. What do you notice?
+There is no noticeable pattern in the scatterplot suggesting the presence of lurking variables.
+
+7a. Based on the data you have analyzed, do you agree with the claim?
+Based on this data set, I do not agree with this claim.
+
+7b. Why?
+No clear and significant pattern emerges from this scatterplot. Even though the 240mm group possesses a higher mean than the other group, the relationship between size and food-pinching performance does not appear clearely. For example, the 270mm group has a much lower performance while 300mm performs better. An hypothesis could be that an external factor has wronged the results of this particular length test (too much testing, leading to tired hands?).
+
+Code:
+
+IPython QtConsole 3.2.1
+Python 2.7.10 |Anaconda 2.3.0 (32-bit)| (default, May 28 2015, 17:02:00) [MSC v.1500 32 bit (Intel)]
+Type "copyright", "credits" or "license" for more information.
+
+In [1]: import pandas as pd
+
+In [2]: path = 'c:/users/benjamin/Downloads/chopstick-effectiveness.csv'
+
+In [3]: dataFrame = pd.read_csv(path)
+   ...: dataFrame
+   ...: 
+Out[3]: 
+     Food.Pinching.Efficiency  Individual  Chopstick.Length
+0                       19.55           1               180
+1                       27.24           2               180
+2                       28.76           3               180
+3                       31.19           4               180
+4                       21.91           5               180
+5                       27.62           6               180
+6                       29.46           7               180
+7                       26.35           8               180
+8                       26.69           9               180
+9                       30.22          10               180
+10                      27.81          11               180
+11                      23.46          12               180
+12                      23.64          13               180
+13                      27.85          14               180
+14                      20.62          15               180
+15                      25.35          16               180
+16                      28.00          17               180
+17                      23.49          18               180
+18                      27.77          19               180
+19                      18.48          20               180
+20                      23.01          21               180
+21                      22.66          22               180
+22                      23.24          23               180
+23                      22.82          24               180
+24                      17.94          25               180
+25                      26.67          26               180
+26                      28.98          27               180
+27                      21.48          28               180
+28                      14.47          29               180
+29                      28.29          30               180
+..                        ...         ...               ...
+156                     26.18           2               330
+157                     25.93           3               330
+158                     28.61           4               330
+159                     20.54           5               330
+160                     26.44           6               330
+161                     29.36           7               330
+162                     19.77           8               330
+163                     31.69           9               330
+164                     24.64          10               330
+165                     22.09          11               330
+166                     23.42          12               330
+167                     28.63          13               330
+168                     26.30          14               330
+169                     22.89          15               330
+170                     22.68          16               330
+171                     30.92          17               330
+172                     20.74          18               330
+173                     27.24          19               330
+174                     17.12          20               330
+175                     23.63          21               330
+176                     20.91          22               330
+177                     23.49          23               330
+178                     24.86          24               330
+179                     16.28          25               330
+180                     21.52          26               330
+181                     27.22          27               330
+182                     17.41          28               330
+183                     16.42          29               330
+184                     28.22          30               330
+185                     27.52          31               330
+
+[186 rows x 3 columns]
+
+In [4]: dataFrame['Food.Pinching.Efficiency'].mean()
+Out[4]: 25.00559139784947
+
+In [5]: meansByChopstickLength = dataFrame.groupby('Chopstick.Length')['Food.Pinching.Efficiency'].mean().reset_index()
+   ...: meansByChopstickLength
+   ...: 
+Out[5]: 
+   Chopstick.Length  Food.Pinching.Efficiency
+0               180                 24.935161
+1               210                 25.483871
+2               240                 26.322903
+3               270                 24.323871
+4               300                 24.968065
+5               330                 23.999677
+
+In [6]: %pylab inline
+   ...: 
+   ...: import matplotlib.pyplot as plt
+   ...: 
+   ...: plt.scatter(x=meansByChopstickLength['Chopstick.Length'], y=meansByChopstickLength['Food.Pinching.Efficiency'])
+   ...:             # title="")
+   ...: plt.xlabel("Length in mm")
+   ...: plt.ylabel("Efficiency in PPPC")
+   ...: plt.title("Average Food Pinching Efficiency by Chopstick Length")
+   ...: plt.show()
+   ...: 
+Populating the interactive namespace from numpy and matplotlib
+
+￼
